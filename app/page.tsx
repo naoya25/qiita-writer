@@ -1,15 +1,14 @@
-"use client";
-import { postQiita } from "@/features/qiita";
+import OpenAIStreamDisplay from "@/components/openai-stream-display";
+import Link from "next/link";
+import React from "react";
 
-export default function Home() {
-  const handlePostQiita = async () => {
-    await postQiita();
-  };
-
+const Home: React.FC = () => {
   return (
     <div>
-      <button onClick={handlePostQiita}>Post to Qiita</button>
       <div className="p-8">Hello World!</div>
+      <OpenAIStreamDisplay />
     </div>
   );
-}
+};
+
+export default Home;

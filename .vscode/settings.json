@@ -1,5 +1,7 @@
 {
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "cSpell.words": ["jsons", "openai", "tailwindcss"],
+  "editor.tabSize": 2
 }
