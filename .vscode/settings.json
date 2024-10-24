@@ -2,6 +2,6 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "cSpell.words": ["jsons", "openai", "tailwindcss"],
+  "cSpell.words": ["jsons", "openai", "tailwindcss", "toastify"],
   "editor.tabSize": 2
 }

@@ -1,3 +1,4 @@
+import { SYSTEM_PROMPT } from "@/constants/prompt";
 import { NextResponse } from "next/server";
 
 export const GET = (req: Request, res: NextResponse) => {
@@ -16,19 +17,10 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       model: "gpt-4o-mini",
       messages: [
-        {
-          role: "system",
-          content: `あなたは、Qiitaの記事を書くライターです。
-            くライターです。
-            記事の内容をtitle, body, tagsに分けてjson形式で出力してください。
-            bodyはマークダウン形式で記述し、tagsは['tagA', 'tagB', 'tagC']のようにしてください。
-            tagsは基本的にプログラミング言語（例: python, ruby）やIT技術に関する短い単語にしてください。`,
-        },
-        {
-          role: "user",
-          content: prompt,
-        },
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: prompt },
       ],
+      response_format: { type: "json_object" },
       stream: true,
     }),
   });

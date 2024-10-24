@@ -1,3 +1,5 @@
+npm install
+
 ```zsh
 npm install openai
 ```
@@ -6,4 +8,3 @@ npm install openai
 NEXT_PUBLIC_QIITA_TOKEN=********************************
 NEXT_PUBLIC_OPEN_AI_API_KEY=********************************
 ```
-

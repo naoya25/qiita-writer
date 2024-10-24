@@ -1,6 +1,7 @@
-export const postQiita = async (article: QiitaArticle) => {
+import { QiitaArticle } from "@/models/qiita_article";
+
+export const postQiita = async (article: QiitaArticle, token: string) => {
   const url = "https://qiita.com/api/v2/items";
-  const token = process.env.NEXT_PUBLIC_QIITA_TOKEN;
 
   const qiita_args = {
     title: article.title,
@@ -14,21 +15,23 @@ export const postQiita = async (article: QiitaArticle) => {
     slide: false,
   };
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(qiita_args),
-  });
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(qiita_args),
+    });
 
-  if (!response.ok) {
-    console.error(`Error: ${response.status} ${response.statusText}`);
-    return null;
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+
+    const data = await response.json();
+    return data.url;
+  } catch (error) {
+    throw new Error(`Error posting to Qiita: ${error}`);
   }
-
-  const data = await response.json();
-  console.log(data);
-  return data;
 };
