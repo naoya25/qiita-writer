@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QiitaArticle } from "@/models/qiita_article";
 import { postQiita } from "@/features/qiita";
 import { showAlertModal } from "@/components/alert_modal_manager";
@@ -9,6 +9,17 @@ export const useQiitaArticle = () => {
   const [qiitaArticle, setQiitaArticle] = useState<QiitaArticle | null>(null);
   const [qiitaUrl, setQiitaUrl] = useState<string | null>(null);
   const [qiitaToken, setQiitaToken] = useState<string>("");
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem("qiitaToken");
+    if (savedToken) {
+      setQiitaToken(savedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("qiitaToken", qiitaToken);
+  }, [qiitaToken]);
 
   const postOpenAIStream = async (input: string) => {
     if (!input.trim() || isLoading) return;
